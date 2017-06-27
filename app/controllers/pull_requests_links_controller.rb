@@ -9,6 +9,9 @@ class PullRequestsLinksController < ::ApplicationController
   end
 
   def show
-    puts 123
+    pull_requests_link = params[:text]
+    pull_request = PullRequestsLink.find_by(link: pull_requests_link)
+
+    render json: { text: "Você já mandou #{pull_request.count}x o link desse PR!"} if pull_request
   end
 end
