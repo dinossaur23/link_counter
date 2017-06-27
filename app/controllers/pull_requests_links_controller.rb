@@ -7,4 +7,8 @@ class PullRequestsLinksController < ::ApplicationController
       pull_request.save
     end
   end
+
+  def show
+    puts 123
+  end
 end
