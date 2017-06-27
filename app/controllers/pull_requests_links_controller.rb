@@ -11,7 +11,9 @@ class PullRequestsLinksController < ::ApplicationController
 
   def show
     pull_requests_link = params[:text]
+    puts "*********** params[:text]=#{params[:text]}"
     match = pull_requests_link.match(/.*(github.com\/youse-seguradora\/.*\/pull\/\d*)/)
+    puts "*********** match[1]=#{match[1]}"
     pull_request = PullRequestsLink.find_by(link: match[1])
 
     render json: { text: "Você já mandou #{pull_request.count}x o link desse PR!"} if pull_request
