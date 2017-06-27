@@ -1,8 +1,9 @@
 class PullRequestsLinksController < ::ApplicationController
   def create
     pull_requests_link = params[:text]
-    if pull_requests_link.match(/.*github.com\/youse-seguradora\/.*\/pull\/\d*/).present?
-      pull_request = PullRequestsLink.find_or_create_by(link: pull_requests_link)
+    match = pull_requests_link.match(/.*(github.com\/youse-seguradora\/.*\/pull\/\d*)/)
+    if match
+      pull_request = PullRequestsLink.find_or_create_by(link: match[1])
       pull_request.count += 1 if pull_request
       pull_request.save
     end
@@ -10,7 +11,8 @@ class PullRequestsLinksController < ::ApplicationController
 
   def show
     pull_requests_link = params[:text]
-    pull_request = PullRequestsLink.find_by(link: pull_requests_link)
+    match = pull_requests_link.match(/.*(github.com\/youse-seguradora\/.*\/pull\/\d*)/)
+    pull_request = PullRequestsLink.find_by(link: match[1])
 
     render json: { text: "Você já mandou #{pull_request.count}x o link desse PR!"} if pull_request
   end
