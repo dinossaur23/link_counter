@@ -14,6 +14,9 @@ class PullRequestsLinksController < ::ApplicationController
     match = pull_requests_link.match(/.*(github.com\/youse-seguradora\/.*\/pull\/\d*)/)
     pull_request = PullRequestsLink.find_by(link: match[1])
 
-    render json: { response_type: 'in_channel', text: "Você já mandou #{pull_request.count}x o link desse PR!"} if pull_request
+    if pull_request
+      render json: { response_type: 'in_channel', text: "Você já mandou #{pull_request.count}x o link desse PR nesse canal!"}
+      pull_request.count -= 1
+    end
   end
 end
