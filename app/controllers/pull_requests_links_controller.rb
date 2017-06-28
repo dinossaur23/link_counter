@@ -1,6 +1,7 @@
 class PullRequestsLinksController < ::ApplicationController
   def create
     pull_requests_link = params[:text]
+
     match = pull_requests_link.match(/.*(github.com\/youse-seguradora\/.*\/pull\/\d*)/)
     if match
       pull_request = PullRequestsLink.find_or_create_by(link: match[1])
