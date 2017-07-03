@@ -9,8 +9,7 @@ RSpec.describe PullRequestsLinksController do
 
     it 'create a new pull request link' do
       expect { post :create, { params: params } }.to change(PullRequestsLink, :count).by(1)
-
-      # expect(response.code).to eq 201
+      expect(response.status).to eq 201
     end
   end
 
@@ -19,8 +18,9 @@ RSpec.describe PullRequestsLinksController do
       { text: 'http://github.com/youse-seguradora/documents/pull/111/files' }
     end
 
-    it 'todo' do
+    it 'request show' do
       expect { get :show, { params: params } }.to change(PullRequestsLink, :count).by(0)
+      expect(response.status).to eq 200
     end
   end
 end
