@@ -18,7 +18,7 @@ class PullRequestsLinksController < ::ApplicationController
     pull_request = PullRequestsLink.find_by(link: match[1])
     response = {
       response_type: 'in_channel',
-      text: "Você já mandou #{pull_request.count}x o link desse PR nesse canal!"
+      text: "Você já mandou #{pull_request.count}x o link desse PR nesse canal!",
       attachments: [
         {
         text: "E foi criado em: #{pull_request.created_at}"
